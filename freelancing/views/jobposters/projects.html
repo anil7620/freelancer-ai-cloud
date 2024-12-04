@@ -14,6 +14,10 @@
         main {
             flex: 1;
         }
+        .scrollable-description {
+            max-height: 4rem; /* Limit the height */
+            overflow-y: auto; /* Enable scrolling */
+        }
     </style>
 </head>
 <body class="bg-purple-100 min-h-screen">
@@ -39,7 +43,9 @@
                 {% for project in projects %}
                 <div class="bg-white shadow-md rounded-lg p-6">
                     <h3 class="text-xl font-bold text-gray-800">{{ project['title'] }}</h3>
-                    <p class="text-gray-600 mt-2">{{ project['description'] }}</p>
+                    <div class="scrollable-description text-gray-600 mt-2 border p-2 rounded">
+                        {{ project['description'] }}
+                    </div>
                     <p class="mt-2"><strong>Category:</strong> {{ project['category_name'] }}</p>
                     <p class="mt-2"><strong>Budget:</strong> ${{ project['expected_cost'] }}</p>
                     <p class="mt-2"><strong>Deadline:</strong> {{ project['deadline'] }}</p>
@@ -71,7 +77,7 @@
                         </form>
                     </div>
                 </div>
-                                {% endfor %}
+                {% endfor %}
             </div>
             {% else %}
             <p class="text-gray-600">No projects found. Create a new project to get started.</p>

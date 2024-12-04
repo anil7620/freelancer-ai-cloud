@@ -15,7 +15,6 @@
             flex: 1;
         }
     </style>
-
 </head>
 <body class="bg-purple-100 min-h-screen">
     <header class="bg-purple-600 text-white py-6">
@@ -39,15 +38,20 @@
             <!-- Title -->
             <label class="block mb-4">
                 <span class="text-gray-800 font-bold">Title</span>
-                <input type="text" name="title" class="w-full mt-2 p-2 border rounded" required>
+                <input id="project-title" type="text" name="title" class="w-full mt-2 p-2 border rounded" required>
             </label>
+
+            <button type="button" id="generate-description" class="bg-blue-500 hover:bg-blue-600 text-white px-2  rounded-lg shadow">
+                Generate
+            </button>
+
 
             <!-- Description -->
             <label class="block mb-4">
                 <span class="text-gray-800 font-bold">Description</span>
-                <textarea name="description" class="w-full mt-2 p-2 border rounded" required></textarea>
+                <textarea id="project-description" name="description" class="w-full mt-2 p-2 border rounded" required></textarea>
             </label>
-
+       
             <!-- Expected Cost -->
             <label class="block mb-4">
                 <span class="text-gray-800 font-bold">Expected Cost</span>
@@ -63,9 +67,37 @@
             <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg shadow">
                 Create Project
             </button>
-
         </form>
         <a href="/jobposter_dashboard" class="block text-center mt-4 text-purple-600">Back to Dashboard</a>
     </main>
+
+    <script>
+        document.getElementById("generate-description").addEventListener("click", async () => {
+            const titleInput = document.getElementById("project-title");
+            const descriptionTextarea = document.getElementById("project-description");
+
+            const title = titleInput.value.trim();
+            if (!title) {
+                alert("Please enter a project title before generating a description.");
+                return;
+            }
+
+            // Send request to AI endpoint
+            const response = await fetch("/generate_project_description", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ title }),
+            });
+
+            const data = await response.json();
+            if (data.description) {
+                descriptionTextarea.value = data.description;
+            } else {
+                alert(data.error || "Failed to generate description. Please try again.");
+            }
+        });
+    </script>
 </body>
 </html>
