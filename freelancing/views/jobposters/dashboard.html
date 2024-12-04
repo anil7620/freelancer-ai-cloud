@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Poster Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-purple-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Job Poster Dashboard</h1>
+            <button onclick="location.href='/logout'" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10">
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Create Project -->
+            <a href="/jobposter_create_project" class="bg-white shadow-md rounded-lg p-6 text-center hover:bg-blue-50">
+                <h3 class="text-xl font-bold text-gray-800">Create Project</h3>
+                <p class="text-gray-600 mt-2">Start a new project to find the right talent.</p>
+            </a>
+            <!-- View Projects -->
+            <a href="/jobposter_projects" class="bg-white shadow-md rounded-lg p-6 text-center hover:bg-blue-50">
+                <h3 class="text-xl font-bold text-gray-800">View Projects</h3>
+                <p class="text-gray-600 mt-2">Manage your projects and review applications.</p>
+            </a>
+            <!-- View Applications -->
+            <a href="/jobposter_projects" class="bg-white shadow-md rounded-lg p-6 text-center hover:bg-blue-50">
+                <h3 class="text-xl font-bold text-gray-800">View Applications</h3>
+                {% if application_count > 0 %}
+                <p class="text-gray-600 mt-2">{{ application_count }} new applications!</p>
+                {% else %}
+                <p class="text-gray-600 mt-2">No applications yet.</p>
+                {% endif %}
+            </a>
+            <!-- Payments -->
+            <a href="/jobposter_payments" class="bg-white shadow-md rounded-lg p-6 text-center hover:bg-blue-50">
+                <h3 class="text-xl font-bold text-gray-800">Payments</h3>
+                <p class="text-gray-600 mt-2">View and track your payments.</p>
+            </a>
+            <!-- My Freelancers -->
+            <a href="/jobposter_freelancers" class="bg-white shadow-md rounded-lg p-6 text-center hover:bg-blue-50">
+                <h3 class="text-xl font-bold text-gray-800">My Freelancers</h3>
+                <p class="text-gray-600 mt-2">View freelancers working on your projects.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-purple-600 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2024 Freelancing Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-100 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-6 flex items-center justify-between px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Freelancer Dashboard</h1>
+            <p class="text-lg mt-2">Welcome! Search for projects and manage your profile.</p>
+        </div>
+        <button onclick="location.href='/logout'" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow">
+            Logout
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto flex-grow mt-10">
+        <div class="grid grid-cols-3 gap-6">
+           
+
+            <!-- Job Search -->
+            <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Job Search</h3>
+                <p class="text-gray-600 mt-2">Find and apply for projects that match your skills.</p>
+                <button onclick="location.href='/freelancer_projects'" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                    Search Projects
+                </button>
+            </div>
+
+            <!-- Payment Tracking -->
+            <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Payment Tracking</h3>
+                <p class="text-gray-600 mt-2">View your earnings and payment history securely.</p>
+                <button onclick="location.href='/freelancer_payments'" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                    Track Payments
+                </button>
+            </div>
+
+            <!-- Contracts -->
+            <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Contracts</h3>
+                <p class="text-gray-600 mt-2">View and manage your ongoing contracts and deliverables.</p>
+                <button onclick="location.href='/freelancer_contracts'" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                    View Contracts
+                </button>
+            </div>
+
+           
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-700 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2024 Freelancing Portal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

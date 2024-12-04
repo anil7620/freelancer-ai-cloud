@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-purple-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-purple-600 text-white py-6 flex items-center justify-between px-6">
+        <h1 class="text-3xl font-bold">My Projects</h1>
+        <div class="flex space-x-4">
+            <button onclick="location.href='/jobposter_create_project'" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+                Add Project
+            </button>
+            <button onclick="location.href='/logout'" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow">
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10">
+        <section>
+            <h2 class="text-2xl font-bold mb-4 text-purple-800">Projects</h2>
+            {% if projects %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for project in projects %}
+                <div class="bg-white shadow-md rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800">{{ project['title'] }}</h3>
+                    <p class="text-gray-600 mt-2">{{ project['description'] }}</p>
+                    <p class="mt-2"><strong>Category:</strong> {{ project['category_name'] }}</p>
+                    <p class="mt-2"><strong>Budget:</strong> ${{ project['expected_cost'] }}</p>
+                    <p class="mt-2"><strong>Deadline:</strong> {{ project['deadline'] }}</p>
+                    <p class="mt-2"><strong>Status:</strong> 
+                        <span class="{% if project['status'] == 'open' %}text-green-600{% else %}text-gray-600{% endif %}">
+                            {{ project['status'] | capitalize }}
+                        </span>
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <!-- View Applications -->
+                        <a href="/jobposter_view_applications/{{ project['_id'] }}" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg shadow">
+                            Applications
+                        </a>
+                        <!-- Edit Project -->
+                        <a href="/edit_project/{{ project['_id'] }}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow">
+                            Edit
+                        </a>
+                        <!-- Toggle Status -->
+                        <form action="/toggle_project_status/{{ project['_id'] }}" method="POST" style="display: inline;">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow">
+                                {% if project['status'] == 'open' %}Close{% else %}Open{% endif %}
+                            </button>
+                        </form>
+                        <!-- Delete Project -->
+                        <form action="/delete_project/{{ project['_id'] }}" method="POST" style="display: inline;">
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-gray-600">No projects found. Create a new project to get started.</p>
+            {% endif %}
+        </section>
+    </main>
+    <a href="/jobposter_dashboard" class="block text-center mt-4 text-purple-600">Back to Dashboard</a>
+
+    <!-- Footer -->
+    <footer class="bg-purple-700 text-white py-4 text-center mt-10">
+        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>

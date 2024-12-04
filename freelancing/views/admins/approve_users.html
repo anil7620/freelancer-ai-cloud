@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Pending Users</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Approve Pending Users</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Freelancers</h2>
+        {% if pending_freelancers %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for freelancer in pending_freelancers %}
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800">{{ freelancer.username }}</h3>
+                <p class="text-gray-600 mt-2"><strong>Email:</strong> {{ freelancer.email }}</p>
+                <form action="/approve_user/{{ freelancer._id }}" method="POST" class="mt-4">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
+                        Approve
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-gray-600 mt-10">No pending freelancers found.</p>
+        {% endif %}
+
+        <h2 class="text-2xl font-bold text-gray-800 mt-10 mb-6">Job Posters</h2>
+        {% if pending_jobposters %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for jobposter in pending_jobposters %}
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800">{{ jobposter.username }}</h3>
+                <p class="text-gray-600 mt-2"><strong>Email:</strong> {{ jobposter.email }}</p>
+                <form action="/approve_user/{{ jobposter._id }}" method="POST" class="mt-4">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
+                        Approve
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-gray-600 mt-10">No pending job posters found.</p>
+        {% endif %}
+        <a href="/admin_dashboard" class="block text-center text-gray-600 mt-10">Back to Admin Dashboard</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>

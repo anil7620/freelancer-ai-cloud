@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-100 min-h-screen">
+    <header class="bg-purple-600 text-white py-6">
+        <h1 class="text-center text-3xl font-bold">Edit Project</h1>
+    </header>
+
+    <main class="container mx-auto mt-10">
+        <form action="/edit_project/{{ project['_id'] }}" method="POST" class="bg-white shadow-md rounded-lg p-6">
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Category</span>
+                <select name="category_name" class="w-full mt-2 p-2 border rounded">
+                    <option value="Web Development" {% if project['category_name'] == 'Web Development' %}selected{% endif %}>Web Development</option>
+                    <option value="App Development" {% if project['category_name'] == 'App Development' %}selected{% endif %}>App Development</option>
+                    <option value="Graphic Design" {% if project['category_name'] == 'Graphic Design' %}selected{% endif %}>Graphic Design</option>
+                    <option value="Content Writing" {% if project['category_name'] == 'Content Writing' %}selected{% endif %}>Content Writing</option>
+                    <option value="Marketing" {% if project['category_name'] == 'Marketing' %}selected{% endif %}>Marketing</option>
+                </select>
+            </label>
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Title</span>
+                <input type="text" name="title" value="{{ project['title'] }}" class="w-full mt-2 p-2 border rounded">
+            </label>
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Description</span>
+                <textarea name="description" class="w-full mt-2 p-2 border rounded">{{ project['description'] }}</textarea>
+            </label>
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Expected Cost</span>
+                <input type="number" name="expected_cost" value="{{ project['expected_cost'] }}" class="w-full mt-2 p-2 border rounded">
+            </label>
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Deadline</span>
+                <input type="date" name="deadline" value="{{ project['deadline'] }}" class="w-full mt-2 p-2 border rounded">
+            </label>
+            <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg shadow">Save Changes</button>
+        </form>
+        <a href="/jobposter_dashboard" class="block text-center mt-4 text-purple-600">Back to Dashboard</a>
+    </main>
+</body>
+</html>

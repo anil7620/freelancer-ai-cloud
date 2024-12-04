@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-gray-800 text-white flex flex-col">
+        <div class="p-6 text-center">
+            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+        </div>
+        <nav class="flex-1">
+            <ul class="space-y-4 p-4">
+                <li><a href="/admin_manage_freelancers" class="block px-4 py-2 hover:bg-gray-700 rounded">Freelancer Management</a></li>
+                <li><a href="/admin_manage_jobposters" class="block px-4 py-2 hover:bg-gray-700 rounded">Job Poster Management</a></li>
+                <li><a href="/admin_payments" class="block px-4 py-2 hover:bg-gray-700 rounded">Payment Management</a></li>
+                <li><a href="/logout" class="block px-4 py-2 bg-red-600 hover:bg-red-700 rounded mt-4">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <header class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-800">Welcome, Admin!</h2>
+            <p class="text-gray-600">Manage users, projects, and payments efficiently.</p>
+        </header>
+        <section class="grid grid-cols-3 gap-6">
+            <div class="bg-white shadow-md rounded-lg p-4 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Active Users</h3>
+                <p class="text-2xl font-semibold text-green-600">{{ active_users }}</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-4 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Active Projects</h3>
+                <p class="text-2xl font-semibold text-blue-600">{{ active_projects }}</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-4 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Total Payments Processed</h3>
+                <p class="text-2xl font-semibold text-purple-600">{{ total_payments }}</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-4 text-center">
+                <h3 class="text-xl font-bold text-gray-800">Total Commission Earned</h3>
+                <p class="text-2xl font-semibold text-orange-600">{{ total_commission }}</p>
+            </div>
+        </section>
+        
+       
+    </main>
+</body>
+</html>

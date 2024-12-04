@@ -1,0 +1,39 @@
+<h3>AI-Powered Chat Suggestions</h3>
+<ul id="ai-suggestions"></ul>
+
+<!-- Input field for user context -->
+<input id="ai-input" type="text" placeholder="Enter context (optional)">
+<button onclick="fetchAISuggestions()">Get AI Suggestions</button>
+
+<textarea id="message-box" placeholder="Type your message"></textarea>
+<button onclick="sendMessage()">Send</button>
+
+<script>
+  function fetchAISuggestions() {
+    const userInput = document.getElementById('ai-input').value;
+
+    fetch(`/ai_chat_suggestions/{{ application['_id'] }}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_input: userInput, project_id: "{{ application['project_id'] }}" })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const suggestionsList = document.getElementById('ai-suggestions');
+        suggestionsList.innerHTML = ""; // Clear previous suggestions
+        if (data.suggestions) {
+          data.suggestions.forEach(suggestion => {
+            const listItem = document.createElement('li');
+            listItem.textContent = suggestion;
+            listItem.onclick = () => {
+              document.getElementById('message-box').value = suggestion;
+            };
+            suggestionsList.appendChild(listItem);
+          });
+        } else {
+          suggestionsList.innerHTML = "<li>No suggestions available.</li>";
+        }
+      })
+      .catch(err => console.error("Error fetching suggestions:", err));
+  }
+</script>

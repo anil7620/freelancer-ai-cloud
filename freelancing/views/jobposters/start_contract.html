@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Contract</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-100 min-h-screen">
+    <header class="bg-purple-600 text-white py-4">
+        <h1 class="text-center text-3xl font-bold">Start Contract</h1>
+    </header>
+
+    <main class="container mx-auto mt-10">
+        <!-- Project and Application Details -->
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Project Details</h2>
+            <p class="mt-2"><strong>Title:</strong> {{ project.title }}</p>
+            <p class="mt-2"><strong>Category:</strong> {{ project.category_name }}</p>
+            <p class="mt-2"><strong>Description:</strong> {{ project.description }}</p>
+            <p class="mt-2"><strong>Budget:</strong> ${{ project.expected_cost }}</p>
+            <p class="mt-2"><strong>Deadline:</strong> {{ project.deadline }}</p>
+        </div>
+
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Application Details</h2>
+            <p class="mt-2"><strong>Freelancer ID:</strong> {{ application.freelancer_id }}</p>
+            <p class="mt-2"><strong>Proposed Budget:</strong> ${{ application.proposed_budget }}</p>
+            <p class="mt-2"><strong>Skills:</strong> {{ application.skills }}</p>
+            <p class="mt-2"><strong>Proposal:</strong> {{ application.proposal }}</p>
+        </div>
+
+        <!-- Contract Form -->
+        <form action="/start_contract/{{ application['_id'] }}" method="POST" class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Contract Details</h2>
+            
+            <!-- Final Budget -->
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Final Budget</span>
+                <input type="number" name="final_budget" class="w-full mt-2 p-2 border rounded" required>
+            </label>
+            
+            <!-- Expected Date of Completion -->
+            <label class="block mb-4">
+                <span class="text-gray-800 font-bold">Expected Date of Completion</span>
+                <input type="date" name="expected_date_of_completion" class="w-full mt-2 p-2 border rounded" required>
+            </label>
+            
+            <button type="submit" class="bg-purple-500 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-600">
+                Create Contract
+            </button>
+        </form>
+    </main>
+    <a href="/jobposter_projects" class="block text-center mt-6 text-purple-500">Back to Projects</a>
+</body>
+</html>

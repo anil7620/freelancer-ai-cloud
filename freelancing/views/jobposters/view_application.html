@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-100 min-h-screen">
+    <header class="bg-purple-600 text-white py-4">
+        <h1 class="text-center text-3xl font-bold">Application Details</h1>
+    </header>
+
+    <main class="container mx-auto mt-10">
+        <!-- Project Details -->
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Project Details</h2>
+            <p class="mt-2"><strong>Title:</strong> {{ project.title }}</p>
+            <p class="mt-2"><strong>Category:</strong> {{ project.category_name }}</p>
+            <p class="mt-2"><strong>Description:</strong> {{ project.description }}</p>
+            <p class="mt-2"><strong>Budget:</strong> ${{ project.expected_cost }}</p>
+            <p class="mt-2"><strong>Deadline:</strong> {{ project.deadline }}</p>
+        </div>
+
+        <!-- Application Details -->
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Proposal from Freelancer</h2>
+            <p class="mt-2"><strong>Proposed Budget:</strong> ${{ application.proposed_budget }}</p>
+            <p class="mt-2"><strong>Skills:</strong> {{ application.skills }}</p>
+            <p class="mt-2"><strong>Proposal:</strong> {{ application.proposal }}</p>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Chat</h2>
+            <div class="space-y-4">
+                {% for comment in application.comments %}
+                <div class="p-4 border rounded {{ 'bg-blue-50' if comment.user_type == 'freelancer' else 'bg-purple-50' }}">
+                    <p class="text-sm text-gray-500">{{ comment.timestamp }}</p>
+                    <p class="text-gray-800">{{ comment.message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <form action="/jobposter_view_application/{{ application['_id'] }}" method="POST" class="mt-6">
+                <textarea name="message" class="w-full mt-2 p-2 border rounded" placeholder="Type your message here..." required></textarea>
+                <button type="submit" class="mt-4 bg-purple-500 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-600">
+                    Send Message
+                </button>
+                    <!-- Start Contract Button -->
+                    <a href="/start_contract/{{ application['_id'] }}" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
+                        Start Contract
+                    </a>
+                
+            </form>
+        </div>
+    </main>
+    <a href="/jobposter_projects" class="block text-center mt-6 text-purple-500">Back to Projects</a>
+</body>
+</html>

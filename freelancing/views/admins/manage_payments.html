@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Payment Management</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10">
+        <table class="w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="px-4 py-2">Amount</th>
+                    <th class="px-4 py-2">Type</th>
+                    <th class="px-4 py-2">Status</th>
+                    <th class="px-4 py-2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr class="border-b">
+                    <td class="px-4 py-2 text-center">${{ payment.amount }}</td>
+                    <td class="px-4 py-2 text-center">{{ payment.typeOfPayment | capitalize }}</td>
+                    <td class="px-4 py-2 text-center">{{ payment.paymentMode }}</td>
+                    <td class="px-4 py-2 text-center">{{ payment.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if not payments %}
+        <p class="text-center text-gray-600 mt-10 text-lg">No payments found.</p>
+        {% endif %}
+        <a href="/admin_dashboard" class="block bg-gray-800 text-white py-2 px-4 mt-10 text-center rounded-lg">Back to Dashboard</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>

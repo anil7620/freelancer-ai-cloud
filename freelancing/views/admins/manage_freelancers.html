@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Freelancer Management</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10">
+        {% if freelancers %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for freelancer in freelancers %}
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800">{{ freelancer.username }}</h3>
+                <p class="text-gray-600 mt-2"><strong>Email:</strong> {{ freelancer.email }}</p>
+                <p class="text-gray-600 mt-2"><strong>Status:</strong> {{ freelancer.status | capitalize }}</p>
+                <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">
+                    Remove
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-gray-600 text-lg">No freelancers found.</p>
+        {% endif %}
+        <a href="/admin_dashboard" class="block text-center text-gray-600 mt-6 hover:underline">Back to Dashboard</a>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
