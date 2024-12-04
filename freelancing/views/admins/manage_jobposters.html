@@ -1,53 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Poster Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        main {
-            flex: 1;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
     </style>
-</head>
-<body class="bg-gray-100 min-h-screen">
+  </head>
+  <body class="bg-gray-100 min-h-screen">
     <!-- Header -->
     <header class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold">Job Poster Management</h1>
-        </div>
+      <div class="container mx-auto text-center">
+        <h1 class="text-3xl font-bold">Job Poster Management</h1>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto mt-10">
-        {% if jobposters %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for jobposter in jobposters %}
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-xl font-bold text-gray-800">{{ jobposter.username }}</h3>
-                <p class="text-gray-600 mt-2"><strong>Email:</strong> {{ jobposter.email }}</p>
-                <p class="text-gray-600 mt-2"><strong>Status:</strong> {{ jobposter.status | capitalize }}</p>
-                <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">
-                    Remove
-                </button>
-            </div>
-            {% endfor %}
+      {% if jobposters %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for jobposter in jobposters %}
+        <div class="bg-white shadow-md rounded-lg p-6">
+          <h3 class="text-xl font-bold text-gray-800">
+            {{ jobposter.username }}
+          </h3>
+          <p class="text-gray-600 mt-2">
+            <strong>Email:</strong> {{ jobposter.email }}
+          </p>
+          <p class="text-gray-600 mt-2">
+            <strong>Status:</strong> {{ jobposter.status | capitalize }}
+          </p>
         </div>
-        {% else %}
-        <p class="text-center text-gray-600 text-lg">No job posters found.</p>
-        {% endif %}
-        <a href="/admin_dashboard" class="block text-center text-gray-600 mt-6 hover:underline">Back to Dashboard</a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-center text-gray-600 text-lg">No job posters found.</p>
+      {% endif %}
+      <a
+        href="/admin_dashboard"
+        class="block text-center text-gray-600 mt-6 hover:underline"
+        >Back to Dashboard</a
+      >
     </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-4 text-center">
-        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+      <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
-</body>
+  </body>
 </html>

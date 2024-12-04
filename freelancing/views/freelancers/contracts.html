@@ -1,87 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contracts</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        main {
-            flex: 1;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        flex: 1;
+      }
     </style>
-</head>
-<body class="bg-blue-100 min-h-screen flex flex-col">
+  </head>
+  <body class="bg-blue-100 min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-blue-600 text-white py-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold">Your Contracts</h1>
-        </div>
+      <div class="container mx-auto text-center">
+        <h1 class="text-3xl font-bold">Your Contracts</h1>
+      </div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto mt-10 space-y-10">
-        <!-- Accepted Contracts -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Accepted Contracts</h2>
-            {% if accepted_contracts %}
-            <ul class="space-y-6">
-                {% for contract in accepted_contracts %}
-                <li class="bg-white shadow-md rounded-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800">Project: {{ contract.project_title }}</h3>
-                    <p class="text-gray-600 mt-2"><strong>Final Budget:</strong> ${{ contract.final_budget }}</p>
-                    <p class="text-gray-600 mt-2"><strong>Deadline:</strong> {{ contract.expected_date_of_completion }}</p>
-                    <p class="text-gray-600 mt-2"><strong>Job Poster:</strong> {{ contract.jobposter_name }}</p>
-                    <p class="text-gray-600 mt-2"><strong>Company:</strong> {{ contract.jobposter_company }}</p>
-                    <p class="text-gray-600 mt-2"><strong>Status:</strong> {{ contract.status | capitalize }}</p>
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
-                        View More Details
-                    </button>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p class="text-gray-600">No accepted contracts found.</p>
-            {% endif %}
-        </section>
+      <!-- Accepted Contracts -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+          Accepted Contracts
+        </h2>
+        {% if accepted_contracts %}
+        <ul class="space-y-6">
+          {% for contract in accepted_contracts %}
+          <li class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-800">
+              Project: {{ contract.project_title }}
+            </h3>
+            <p class="text-gray-600 mt-2">
+              <strong>Final Budget:</strong> ${{ contract.final_budget }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Deadline:</strong> {{ contract.expected_date_of_completion
+              }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Job Poster:</strong> {{ contract.jobposter_name }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Company:</strong> {{ contract.jobposter_company }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Status:</strong> {{ contract.status | capitalize }}
+            </p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-600">No accepted contracts found.</p>
+        {% endif %}
+      </section>
 
-        <!-- Pending Contracts -->
-<!-- Pending Contracts Section -->
-<section>
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pending Contracts</h2>
-    {% if pending_contracts %}
-    <ul class="space-y-6">
-        {% for contract in pending_contracts %}
-        <li class="bg-white shadow-md rounded-lg p-6">
-            <h3 class="text-xl font-bold text-gray-800">Project: {{ contract.project_title }}</h3>
-            <p class="text-gray-600 mt-2"><strong>Proposed Budget:</strong> ${{ contract.final_budget }}</p>
-            <p class="text-gray-600 mt-2"><strong>Expected Completion Date:</strong> {{ contract.expected_date_of_completion }}</p>
-            <p class="text-gray-600 mt-2"><strong>Job Poster:</strong> {{ contract.jobposter_name }}</p>
-            <p class="text-gray-600 mt-2"><strong>Company:</strong> {{ contract.jobposter_company }}</p>
-            <p class="text-gray-600 mt-2"><strong>Status:</strong> {{ contract.status | capitalize }}</p>
+      <!-- Pending Contracts -->
+      <!-- Pending Contracts Section -->
+      <section>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Pending Contracts</h2>
+        {% if pending_contracts %}
+        <ul class="space-y-6">
+          {% for contract in pending_contracts %}
+          <li class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-800">
+              Project: {{ contract.project_title }}
+            </h3>
+            <p class="text-gray-600 mt-2">
+              <strong>Proposed Budget:</strong> ${{ contract.final_budget }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Expected Completion Date:</strong> {{
+              contract.expected_date_of_completion }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Job Poster:</strong> {{ contract.jobposter_name }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Company:</strong> {{ contract.jobposter_company }}
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Status:</strong> {{ contract.status | capitalize }}
+            </p>
             <form action="/accept_contract/{{ contract['_id'] }}" method="POST">
-                <button type="submit" class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
-                    Accept Contract
-                </button>
+              <button
+                type="submit"
+                class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600"
+              >
+                Accept Contract
+              </button>
             </form>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p class="text-gray-600">No pending contracts found.</p>
-    {% endif %}
-</section>
-        <a href="/freelancer_dashboard" class="block text-center mt-6 text-blue-500">Dashboard</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-600">No pending contracts found.</p>
+        {% endif %}
+      </section>
+      <a
+        href="/freelancer_dashboard"
+        class="block text-center mt-6 text-blue-500"
+        >Dashboard</a
+      >
     </main>
 
     <!-- Footer -->
     <footer class="bg-blue-700 text-white py-4 text-center">
-        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+      <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
-</body>
+  </body>
 </html>

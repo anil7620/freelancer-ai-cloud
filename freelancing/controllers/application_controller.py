@@ -13,34 +13,88 @@ google_model = genai.GenerativeModel("gemini-1.5-flash")
 @freelancing.route('/chatbot', methods=['POST'])
 def chatbot():
     """
-    Handle chatbot queries and return AI-generated responses using Google Generative AI.
+    Handle chatbot queries and return AI-generated responses including project details.
     """
+    print(f"In chat bot")
     user_message = request.json.get("message", "").strip().lower()
 
     if not user_message:
         return jsonify({"reply": "I need a message to assist you. Please type something!"}), 400
 
     try:
+        base_url = request.host_url
+
         # Check if the user is asking about available projects
         if "projects" in user_message or "available projects" in user_message:
-            base_url = request.host_url
-            projects = Project.find({"status": "open"})
+            projects = Project.find({"status": "open"})  # Fetch open projects from the database
+
             if not projects:
                 reply = "No projects are available at the moment. Please check back later!"
             else:
-                project_links = [
-                    f"<a href='{base_url}apply_project/{project['_id']}'>{project.get('title', 'Unnamed Project')}</a>"
-                    for project in projects[:5]
-                ]
+                # Include project details in the response
+                project_details = []
+                for project in projects[:5]:
+                    project_id = project.get('_id', 'Unknown ID')
+                    title = project.get('title', 'Unnamed Project')
+                    budget = project.get('expected_cost', 'Not specified')
+                    category = project.get('category_name', 'Not specified')
+                    description = project.get('description', 'No description provided.')
+                    deadline = project.get('deadline', 'No deadline specified')
+
+                    # Create a detailed project summary
+                    project_detail = f"""
+                    <strong>{title}</strong> (Budget: {budget})<br>
+                    Description: {description}<br>
+                    Deadline: {deadline}<br>
+                    Category: {category}<br>
+                    <a href='{base_url}apply_project/{project_id}'>Apply Now</a>
+                    """
+                    project_details.append(project_detail.strip())
+
                 reply = (
-                    "Here are some projects you can apply for:<br>" + "<br>".join(project_links)
+                    "Here are some projects you can apply for:<br><br>"
+                    + "<br><br>".join(project_details)
                 )
+
+        elif any(keyword in user_message for keyword in ["about", "details", "specific"]):
+            # Extract keywords from user query
+            query_words = user_message.replace("about", "").replace("details", "").strip()
+            keywords = [word.strip() for word in query_words.split() if word]
+
+            if not keywords:
+                reply = "Can you please provide more information about which project you want details for?"
+            else:
+                # Find a project that matches any of the keywords
+                project = Project.find_one(
+                    {"$and": [{"status": "open"}, {"title": {"$regex": "|".join(keywords), "$options": "i"}}]}
+                )
+
+                if project:
+                    title = project.get('title', 'Unnamed Project')
+                    budget = project.get('expected_cost', 'Not specified')
+                    description = project.get('description', 'No description provided.')
+                    deadline = project.get('deadline', 'No deadline specified')
+                    category = project.get('category_name', 'Not specified')
+
+                    reply = f"""
+                    Here are the details for <strong>{title}</strong>:<br>
+                    <strong>Budget:</strong> {budget}<br>
+                    <strong>Description:</strong> {description}<br>
+                    <strong>Deadline:</strong> {deadline}<br>
+                    <strong>Category:</strong> {category}<br>
+                    <a href='{base_url}apply_project/{project.get('_id')}'>Apply Now</a>
+                    """
+                else:
+                    reply = f"I couldn't find a project matching '{query_words}'. Please check the project titles on the screen."
+
         else:
             # General AI response with guided prompts
             prompt = f"""
-            You are a helpful freelancing platform assistant. Your job is to help users find projects or clarify queries about their freelance work. 
+            You are a helpful freelancing platform assistant. Your job is to help users find projects or clarify queries about their freelance work.
 
-            If the user mentions "projects," provide a list of projects if available. For other queries, offer clear and concise responses that directly address their needs.
+            If the user mentions "projects," provide a list of projects with details like title, budget, description, and deadline. If the user asks for specific details like title or budget or description or deadline ask them for which project they need the information, and based on the title provided, if the project exists, give the details. Otherwise, inform them politely that the project isn't available. 
+
+            For other queries, offer clear and concise responses that directly address their needs.
 
             User Query: {user_message}
 
