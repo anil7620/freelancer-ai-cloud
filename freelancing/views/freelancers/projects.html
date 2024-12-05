@@ -1,124 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main {
-        flex: 1;
-      }
-      .scrollable-description {
-        max-height: 4rem; /* Limit the height */
-        overflow-y: auto; /* Enable scrolling */
-      }
+        body {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .scrollable-description {
+            max-height: 4rem; /* Limit the height */
+            overflow-y: auto; /* Enable scrolling */
+        }
     </style>
-  </head>
-  <body class="bg-blue-100 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-blue-600 text-white py-6">
-      <div class="container mx-auto text-center">
-        <h1 class="text-3xl font-bold">Available Projects</h1>
-      </div>
-    </header>
+</head>
+<body class="bg-blue-100">
+    <!-- Sidebar -->
+    <aside class="bg-blue-600 text-white w-1/6 min-h-screen py-4 px-2 flex flex-col">
+        <div class="mb-6 text-center">
+            <h2 class="text-xl font-bold">Dashboard</h2>
+        </div>
+        <nav class="space-y-4">
+            <a href="/freelancer_projects" class="flex items-center space-x-2 px-2 py-3 bg-blue-700 hover:bg-blue-800 rounded-lg">
+                <span class="material-icons text-xl">search</span>
+                <span class="text-sm">Search</span>
+            </a>
+            <a href="/freelancer_payments" class="flex items-center space-x-2 px-2 py-3 bg-blue-700 hover:bg-blue-800 rounded-lg">
+                <span class="material-icons text-xl">payments</span>
+                <span class="text-sm">Payments</span>
+            </a>
+            <a href="/freelancer_contracts" class="flex items-center space-x-2 px-2 py-3 bg-blue-700 hover:bg-blue-800 rounded-lg">
+                <span class="material-icons text-xl">description</span>
+                <span class="text-sm">Contracts</span>
+            </a>
+            <button onclick="location.href='/logout'" class="w-full flex items-center space-x-2 px-2 py-3 bg-red-500 hover:bg-red-600 rounded-lg">
+                <span class="material-icons text-xl">logout</span>
+                <span class="text-sm">Logout</span>
+            </button>
+        </nav>
+    </aside>
 
     <!-- Main Content -->
-    <main class="container mx-auto mt-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for project in projects %}
-        <div class="bg-white shadow-md rounded-lg p-6 flex flex-col">
-          <h3 class="text-xl font-bold text-gray-800">{{ project.title }}</h3>
-          <div
-            class="scrollable-description text-gray-600 mt-2 border p-2 rounded"
-          >
-            {{ project['description'] }}
-          </div>
-          <p class="mt-2 text-blue-500">
-            <strong>Budget:</strong> ${{ project.expected_cost }}
-          </p>
-          <p class="mt-2 text-gray-600">
-            <strong>Category:</strong> {{ project.category_name }}
-          </p>
-          <p class="mt-2 text-gray-600">
-            <strong>Deadline:</strong> {{ project.deadline }}
-          </p>
-          {% if project.applied %}
-          <button
-            onclick="location.href='/view_application/{{ project.application_id }}'"
-            class="mt-auto bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600"
-          >
-            View Application
-          </button>
-          {% else %}
-          <button
-            onclick="location.href='/apply_project/{{ project['_id'] }}'"
-            class="mt-auto bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
-          >
-            Apply Now
-          </button>
-          {% endif %}
+    <main class="container mx-auto flex-grow mt-10">
+        <header class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-blue-800">Available Projects</h1>
+        </header>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for project in projects %}
+            <div class="bg-white shadow-md rounded-lg p-6 flex flex-col">
+                <h3 class="text-xl font-bold text-gray-800">{{ project.title }}</h3>
+                <div
+                    class="scrollable-description text-gray-600 mt-2 border p-2 rounded"
+                >
+                    {{ project['description'] }}
+                </div>
+                <p class="mt-2 text-blue-500">
+                    <strong>Budget:</strong> ${{ project.expected_cost }}
+                </p>
+                <p class="mt-2 text-gray-600">
+                    <strong>Category:</strong> {{ project.category_name }}
+                </p>
+                <p class="mt-2 text-gray-600">
+                    <strong>Deadline:</strong> {{ project.deadline }}
+                </p>
+                {% if project.applied %}
+                <button
+                    onclick="location.href='/view_application/{{ project.application_id }}'"
+                    class="mt-auto bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600"
+                >
+                    View Application
+                </button>
+                {% else %}
+                <button
+                    onclick="location.href='/apply_project/{{ project['_id'] }}'"
+                    class="mt-auto bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+                >
+                    Apply Now
+                </button>
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-      </div>
-      {% if not projects %}
-      <p class="text-center text-gray-600 mt-10 text-lg">
-        No projects are available at the moment.
-      </p>
-      {% endif %}
-      <a
-        href="/freelancer_dashboard"
-        class="block text-center text-blue-500 mt-6"
-        >Back to Dashboard</a
-      >
+        {% if not projects %}
+        <p class="text-center text-gray-600 mt-10 text-lg">
+            No projects are available at the moment.
+        </p>
+        {% endif %}
     </main>
 
     <!-- Chatbot Widget -->
     <div id="chatbot-widget" class="fixed bottom-4 right-4 w-80">
-      <div id="chatbot-icon" class="cursor-pointer">
-        <img
-          src="https://media.istockphoto.com/id/1333838449/vector/chatbot-icon-support-bot-cute-smiling-robot-with-headset-the-symbol-of-an-instant-response.jpg?s=612x612&w=0&k=20&c=sJ_uGp9wJ5SRsFYKPwb-dWQqkskfs7Fz5vCs2w5w950="
-          alt="Chatbot Icon"
-          class="w-16 h-16 rounded-full shadow-lg"
-        />
-      </div>
-      <div
-        id="chatbot-interface"
-        class="hidden bg-white shadow-xl rounded-lg flex flex-col h-96"
-      >
-        <div
-          id="chatbot-header"
-          class="flex justify-between items-center bg-blue-600 text-white p-4 rounded-t-lg"
-        >
-          <h3 class="text-lg font-bold">Project Chat Assistant</h3>
-          <button id="chatbot-close" class="text-xl font-bold">&times;</button>
-        </div>
-        <div id="chatbot-body" class="flex-1 overflow-y-auto p-4 space-y-4">
-          <div id="chatbot-messages" class="space-y-4"></div>
+        <div id="chatbot-icon" class="cursor-pointer">
+            <img
+                src="https://media.istockphoto.com/id/1333838449/vector/chatbot-icon-support-bot-cute-smiling-robot-with-headset-the-symbol-of-an-instant-response.jpg?s=612x612&w=0&k=20&c=sJ_uGp9wJ5SRsFYKPwb-dWQqkskfs7Fz5vCs2w5w950="
+                alt="Chatbot Icon"
+                class="w-16 h-16 rounded-full shadow-lg"
+            />
         </div>
         <div
-          id="chatbot-input-container"
-          class="flex p-4 bg-gray-100 border-t border-gray-300"
+            id="chatbot-interface"
+            class="hidden bg-white shadow-xl rounded-lg flex flex-col h-96"
         >
-          <input
-            id="chatbot-input"
-            type="text"
-            placeholder="Ask about this project..."
-            class="flex-grow p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <button
-            id="chatbot-send"
-            class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
-          >
-            Send
-          </button>
+            <div
+                id="chatbot-header"
+                class="flex justify-between items-center bg-blue-600 text-white p-4 rounded-t-lg"
+            >
+                <h3 class="text-lg font-bold">Project Chat Assistant</h3>
+                <button id="chatbot-close" class="text-xl font-bold">&times;</button>
+            </div>
+            <div id="chatbot-body" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div id="chatbot-messages" class="space-y-4"></div>
+            </div>
+            <div
+                id="chatbot-input-container"
+                class="flex p-4 bg-gray-100 border-t border-gray-300"
+            >
+                <input
+                    id="chatbot-input"
+                    type="text"
+                    placeholder="Ask about this project..."
+                    class="flex-grow p-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <button
+                    id="chatbot-send"
+                    class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+                >
+                    Send
+                </button>
+            </div>
         </div>
-      </div>
     </div>
 
     <script>
@@ -179,9 +195,8 @@
         });
     </script>
 
-    <!-- Footer -->
-    <footer class="bg-blue-700 text-white py-4 text-center">
-      <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
-    </footer>
-  </body>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</body>
 </html>

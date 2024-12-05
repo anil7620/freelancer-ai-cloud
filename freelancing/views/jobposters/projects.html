@@ -20,18 +20,47 @@
         }
     </style>
 </head>
-<body class="bg-purple-100 min-h-screen">
+<body class="bg-gray-200 min-h-screen">
+    <!-- Floating Navigation Menu -->
+    <div class="fixed bottom-6 left-6 space-y-4">
+        <!-- Create Project -->
+        <div class="group relative">
+            <a href="/jobposter_create_project" class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">add_box</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Add Project
+            </span>
+        </div>
+
+  
+        <!-- Payments -->
+        <div class="group relative">
+            <a href="/jobposter_payments" class="bg-yellow-500 text-white p-4 rounded-full shadow-lg hover:bg-yellow-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">payment</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Payments
+            </span>
+        </div>
+
+        <!-- My Freelancers -->
+        <div class="group relative">
+            <a href="/jobposter_freelancers" class="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">supervised_user_circle</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                My Freelancers
+            </span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="bg-purple-600 text-white py-6 flex items-center justify-between px-6">
         <h1 class="text-3xl font-bold">My Projects</h1>
-        <div class="flex space-x-4">
-            <button onclick="location.href='/jobposter_create_project'" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow">
-                Add Project
-            </button>
-            <button onclick="location.href='/logout'" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow">
-                Logout
-            </button>
-        </div>
+        <button onclick="location.href='/logout'" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow">
+            Logout
+        </button>
     </header>
 
     <!-- Main Content -->
@@ -90,5 +119,8 @@
     <footer class="bg-purple-700 text-white py-4 text-center mt-10">
         <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 </html>

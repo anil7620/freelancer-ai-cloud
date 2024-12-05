@@ -6,14 +6,28 @@
     <title>Admin Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-red-600 text-white py-6">
-        <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold">Admin Registration</h1>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <!-- Main Content -->
+    <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row">
+        <!-- Left Column -->
+        <div class="flex-1 flex items-center justify-center bg-gray-50 p-6 rounded-l-lg">
+            <div class="text-center">
+                <img 
+                    src="https://static.vecteezy.com/system/resources/previews/020/101/791/non_2x/admin-login-blue-gradient-concept-icon-administrator-account-learning-management-system-access-abstract-idea-thin-line-illustration-isolated-outline-drawing-vector.jpg" 
+                    alt="Admin Illustration" 
+                    class="w-full max-w-sm rounded-lg mb-4"
+                />
+                <h2 class="text-2xl font-bold text-red-600">Thanks for Being an Admin!</h2>
+                <p class="text-gray-700 mt-2">
+                    By becoming an admin, you play a key role in ensuring smooth operations. 
+                    We appreciate your contribution to managing and supporting the platform.
+                </p>
+            </div>
         </div>
-    </header>
-    <main class="container mx-auto mt-10 max-w-lg">
-        <div class="bg-white shadow-lg rounded-lg p-6">
+
+        <!-- Right Column -->
+        <div class="flex-1 p-6 rounded-r-lg">
+            <h1 class="text-2xl font-bold text-center text-red-600 mb-4">Register as Admin</h1>
             <form action="/admin_register" method="POST" class="space-y-4">
                 <label for="email" class="block text-gray-700 font-medium">Email:</label>
                 <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
@@ -28,6 +42,6 @@
                 <a href="/" class="block text-center text-red-600 hover:underline">Back to Home</a>
             </form>
         </div>
-    </main>
+    </div>
 </body>
 </html>

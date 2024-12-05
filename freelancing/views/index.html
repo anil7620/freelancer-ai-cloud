@@ -16,36 +16,103 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-green-600 text-white py-6">
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-600 to-blue-500 text-white py-8">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold">Welcome to the Freelancing Portal</h1>
-            <p class="text-lg mt-2">Connecting Job Posters with Freelancers</p>
+            <h1 class="text-5xl font-extrabold">Freelancing Portal</h1>
+            <p class="text-xl mt-3 font-light">Connecting Job Posters with Freelancers, powered by Generative AI</p>
         </div>
     </header>
-    <main class="container mx-auto mt-10">
-        <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-gray-800 text-center">Choose Your Role</h2>
-            <p class="text-center text-gray-600 mt-4">Welcome! Please select your role to continue:</p>
-            <div class="flex justify-center space-x-6 mt-6">
-                <a href="/login" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow hover:bg-green-600 transition transform hover:-translate-y-1">
-                    Login
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-10 px-6">
+        <!-- Role Selection -->
+        <section class="bg-white shadow-2xl rounded-xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 text-center">Choose Your Role</h2>
+            <p class="text-center text-gray-600 mt-4">Welcome! Please select your role to explore tailored features:</p>
+            <div class="flex justify-center flex-wrap gap-6 mt-8">
+                <a href="/login" class="relative inline-block px-8 py-4 font-bold text-white group">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-teal-500 rounded-lg filter blur transition duration-300 ease-in-out group-hover:blur-lg"></span>
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-teal-500 rounded-lg shadow-md group-hover:shadow-lg transition duration-300 ease-in-out"></span>
+                    <span class="relative block bg-white text-green-600 py-3 px-6 rounded-md shadow-lg hover:text-white hover:bg-green-600 transition duration-300 ease-in-out">
+                        Login
+                    </span>
                 </a>
-                <a href="/admin_register" class="bg-red-500 text-white px-6 py-3 rounded-lg shadow hover:bg-red-600 transition transform hover:-translate-y-1">
-                    Register Admin
+                <a href="/admin_register" class="relative inline-block px-8 py-4 font-bold text-white group">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-red-500 to-pink-500 rounded-lg filter blur transition duration-300 ease-in-out group-hover:blur-lg"></span>
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-red-500 to-pink-500 rounded-lg shadow-md group-hover:shadow-lg transition duration-300 ease-in-out"></span>
+                    <span class="relative block bg-white text-red-600 py-3 px-6 rounded-md shadow-lg hover:text-white hover:bg-red-600 transition duration-300 ease-in-out">
+                        Register Admin
+                    </span>
                 </a>
-                <a href="/freelancer_register" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition transform hover:-translate-y-1">
-                    Register Freelancer
+                <a href="/freelancer_register" class="relative inline-block px-8 py-4 font-bold text-white group">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg filter blur transition duration-300 ease-in-out group-hover:blur-lg"></span>
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg shadow-md group-hover:shadow-lg transition duration-300 ease-in-out"></span>
+                    <span class="relative block bg-white text-blue-600 py-3 px-6 rounded-md shadow-lg hover:text-white hover:bg-blue-600 transition duration-300 ease-in-out">
+                        Register Freelancer
+                    </span>
                 </a>
-                <a href="/jobposter_register" class="bg-purple-500 text-white px-6 py-3 rounded-lg shadow hover:bg-purple-600 transition transform hover:-translate-y-1">
-                    Register Job Poster
+                <a href="/jobposter_register" class="relative inline-block px-8 py-4 font-bold text-white group">
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg filter blur transition duration-300 ease-in-out group-hover:blur-lg"></span>
+                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg shadow-md group-hover:shadow-lg transition duration-300 ease-in-out"></span>
+                    <span class="relative block bg-white text-purple-600 py-3 px-6 rounded-md shadow-lg hover:text-white hover:bg-purple-600 transition duration-300 ease-in-out">
+                        Register Job Poster
+                    </span>
                 </a>
             </div>
-        </div>
+            
+        </section>
+
+        <!-- About Application -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Job Posters -->
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                <img src="https://pbs.twimg.com/media/C9qSGxbUMAEb0nX.jpg" alt="Job Posters" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">For Job Posters</h3>
+                    <p class="text-gray-600 mt-2">Generate engaging job descriptions effortlessly with our AI-powered tools. Save time and attract the best talent.</p>
+                </div>
+            </div>
+
+            <!-- Freelancers -->
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0IS9uuAsTKSVXIAtYAOxJjgjhNSWz62hD-w&s" alt="Freelancers" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-gray-800">For Freelancers</h3>
+                    <p class="text-gray-600 mt-2">Use our smart chatbot to answer questions, navigate challenges, and find the right jobs tailored to your skills.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generative AI Features -->
+        <section class="bg-gradient-to-r from-gray-100 to-gray-200 mt-12 p-10 rounded-xl shadow-inner">
+            <h2 class="text-4xl font-extrabold text-center text-gray-800">Why Choose Us?</h2>
+            <div class="flex flex-wrap justify-between mt-8 gap-6">
+                <!-- Feature 1 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex-1">
+                    <h3 class="text-xl font-bold text-green-600">AI-Powered Job Descriptions</h3>
+                    <p class="text-gray-600 mt-2">Let AI craft professional job descriptions that attract the best talent with ease.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex-1">
+                    <h3 class="text-xl font-bold text-blue-600">Smart Freelance Assistance</h3>
+                    <p class="text-gray-600 mt-2">Get career advice, job matches, and skill enhancement suggestions via chatbot.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white shadow-lg rounded-lg p-6 flex-1">
+                    <h3 class="text-xl font-bold text-purple-600">Seamless Collaboration</h3>
+                    <p class="text-gray-600 mt-2">Experience smooth connections between job posters and freelancers in real-time.</p>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer class="bg-gray-800 text-white py-6 mt-10" style="margin-top: auto;">
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-auto">
         <div class="container mx-auto text-center">
             <p class="text-sm">&copy; 2024 Freelancing Portal. All rights reserved.</p>
+            <p class="text-xs mt-2">Powered by Generative AI to simplify freelancing for everyone.</p>
         </div>
     </footer>
 </body>

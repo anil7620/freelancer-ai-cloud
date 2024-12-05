@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Freelancers</title>
+    <title>Payments</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -16,42 +16,90 @@
         }
     </style>
 </head>
-<body class="bg-purple-100 min-h-screen flex flex-col">
+<body class="bg-gray-200 min-h-screen flex flex-col">
+    <!-- Floating Navigation Menu -->
+    <div class="fixed bottom-6 left-6 space-y-4">
+        <!-- Add Project -->
+        <div class="group relative">
+            <a href="/jobposter_create_project" class="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">add_box</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Add Project
+            </span>
+        </div>
+
+        <!-- View Projects -->
+        <div class="group relative">
+            <a href="/jobposter_projects" class="bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">view_list</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                View Projects
+            </span>
+        </div>
+
+        <!-- View Applications -->
+        
+
+        <!-- My Freelancers -->
+        <div class="group relative">
+            <a href="/jobposter_freelancers" class="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">supervised_user_circle</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                My Freelancers
+            </span>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header class="bg-purple-500 text-white py-6">
+    <header class="bg-purple-600 text-white py-6">
         <div class="container mx-auto text-center">
-            <h1 class="text-3xl font-bold">My Freelancers</h1>
+            <h1 class="text-3xl font-bold">Payment History</h1>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto mt-10">
-        {% if freelancers %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for freelancer in freelancers %}
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <h3 class="text-xl font-bold text-gray-800">{{ freelancer.name }}</h3>
-                <p class="text-gray-600 mt-2"><strong>Email:</strong> {{ freelancer.email }}</p>
-                <p class="text-gray-600 mt-2"><strong>Project:</strong> {{ freelancer.project_title }}</p>
-                <p class="text-gray-600 mt-2"><strong>Deadline:</strong> {{ freelancer.deadline }}</p>
-                <form action="/mark_as_done/{{ freelancer.contract_id }}" method="POST" class="mt-4">
-                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600">
-                        Mark as Done
-                    </button>
-                </form>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="text-gray-600 text-center mt-10">No freelancers are currently working on your projects.</p>
+        <table class="table-auto w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-purple-500 text-white">
+                <tr>
+                    <th class="px-4 py-2">Date</th>
+                    <th class="px-4 py-2">Amount</th>
+                    <th class="px-4 py-2">Payment Mode</th>
+                    <th class="px-4 py-2">Type</th>
+                    <th class="px-4 py-2">Freelancer Amount</th>
+                    <th class="px-4 py-2">Admin Commission</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr class="border-b hover:bg-purple-50">
+                    <td class="px-4 py-2">{{ payment.created_at.strftime('%Y-%m-%d') }}</td>
+                    <td class="px-4 py-2">${{ payment.amount }}</td>
+                    <td class="px-4 py-2">{{ payment.paymentMode }}</td>
+                    <td class="px-4 py-2">{{ payment.typeOfPayment | capitalize }}</td>
+                    <td class="px-4 py-2">${{ payment.freelancer_amount }}</td>
+                    <td class="px-4 py-2">${{ payment.admin_commission }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if not payments %}
+        <p class="text-center text-gray-600 mt-10 text-lg">No payments have been made yet.</p>
         {% endif %}
-
-        <a href="/jobposter_dashboard" class="block bg-purple-500 text-white px-4 py-2 rounded mt-6 text-center">Back to Dashboard</a>
+        <a href="/jobposter_dashboard" class="block bg-purple-600 text-white px-4 py-2 rounded mt-6 hover:bg-purple-700 text-center">
+            Back to Dashboard
+        </a>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-purple-500 text-white py-4 text-center">
+    <footer class="bg-purple-600 text-white py-4 text-center">
         <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 </html>

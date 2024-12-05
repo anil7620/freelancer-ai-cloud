@@ -16,7 +16,35 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-purple-100 min-h-screen">
+    <!-- Floating Navigation Menu -->
+    <div class="fixed bottom-6 left-6 space-y-4">
+        <div class="group relative">
+            <a href="/admin_manage_freelancers" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">group</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Manage Freelancers
+            </span>
+        </div>
+        <div class="group relative">
+            <a href="/admin_manage_jobposters" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">work</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Manage Job Posters
+            </span>
+        </div>
+        <div class="group relative">
+            <a href="/admin_dashboard" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">dashboard</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Back to Dashboard
+            </span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="bg-gray-800 text-white py-6">
         <div class="container mx-auto text-center">
@@ -26,35 +54,42 @@
 
     <!-- Main Content -->
     <main class="container mx-auto mt-10">
-        <table class="w-full bg-white shadow-md rounded-lg">
-            <thead class="bg-gray-800 text-white">
-                <tr>
-                    <th class="px-4 py-2">Amount</th>
-                    <th class="px-4 py-2">Type</th>
-                    <th class="px-4 py-2">Status</th>
-                    <th class="px-4 py-2">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for payment in payments %}
-                <tr class="border-b">
-                    <td class="px-4 py-2 text-center">${{ payment.amount }}</td>
-                    <td class="px-4 py-2 text-center">{{ payment.typeOfPayment | capitalize }}</td>
-                    <td class="px-4 py-2 text-center">{{ payment.paymentMode }}</td>
-                    <td class="px-4 py-2 text-center">{{ payment.created_at }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="overflow-x-auto shadow-md rounded-lg bg-white">
+            <table class="w-full table-auto border-collapse">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="px-6 py-3 text-left">Amount</th>
+                        <th class="px-6 py-3 text-left">Type</th>
+                        <th class="px-6 py-3 text-left">Status</th>
+                        <th class="px-6 py-3 text-left">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                    <tr class="hover:bg-gray-100 border-b">
+                        <td class="px-6 py-3">${{ payment.amount }}</td>
+                        <td class="px-6 py-3">{{ payment.typeOfPayment | capitalize }}</td>
+                        <td class="px-6 py-3">{{ payment.paymentMode }}</td>
+                        <td class="px-6 py-3">{{ payment.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% if not payments %}
         <p class="text-center text-gray-600 mt-10 text-lg">No payments found.</p>
         {% endif %}
-        <a href="/admin_dashboard" class="block bg-gray-800 text-white py-2 px-4 mt-10 text-center rounded-lg">Back to Dashboard</a>
+        <a href="/admin_dashboard" class="block bg-gray-800 text-white py-2 px-4 mt-10 text-center rounded-lg shadow-lg hover:bg-gray-700 transition">
+            Back to Dashboard
+        </a>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-4 text-center">
+    <footer class="bg-gray-800 text-white py-4 text-center mt-auto">
         <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 </html>

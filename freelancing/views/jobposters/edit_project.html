@@ -5,12 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
-<body class="bg-purple-100 min-h-screen">
+<body class="bg-gray-200 min-h-screen">
+    <!-- Floating Navigation Menu -->
+    <div class="fixed bottom-6 left-6 space-y-4">
+        <!-- View Projects -->
+        <div class="group relative">
+            <a href="/jobposter_projects" class="bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">view_list</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                View Projects
+            </span>
+        </div>
+
+ 
+
+        <!-- Payments -->
+        <div class="group relative">
+            <a href="/jobposter_payments" class="bg-yellow-500 text-white p-4 rounded-full shadow-lg hover:bg-yellow-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">payment</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Payments
+            </span>
+        </div>
+
+        <!-- My Freelancers -->
+        <div class="group relative">
+            <a href="/jobposter_freelancers" class="bg-red-500 text-white p-4 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center">
+                <span class="material-icons text-3xl">supervised_user_circle</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                My Freelancers
+            </span>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header class="bg-purple-600 text-white py-6">
         <h1 class="text-center text-3xl font-bold">Edit Project</h1>
     </header>
 
+    <!-- Main Content -->
     <main class="container mx-auto mt-10">
         <form action="/edit_project/{{ project['_id'] }}" method="POST" class="bg-white shadow-md rounded-lg p-6">
             <label class="block mb-4">
@@ -43,5 +90,8 @@
         </form>
         <a href="/jobposter_dashboard" class="block text-center mt-4 text-purple-600">Back to Dashboard</a>
     </main>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 </html>

@@ -1,60 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Freelancer Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main {
-        flex: 1;
-      }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
     </style>
-  </head>
-  <body class="bg-gray-100 min-h-screen">
+</head>
+<body class="bg-purple-100 min-h-screen">
+    <!-- Floating Navigation Menu -->
+    <div class="fixed bottom-6 left-6 space-y-4">
+        <div class="group relative">
+            <a href="/admin_manage_jobposters" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">work</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Manage Job Posters
+            </span>
+        </div>
+        <div class="group relative">
+            <a href="/admin_payments" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">payments</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Payment Management
+            </span>
+        </div>
+        <div class="group relative">
+            <a href="/admin_dashboard" class="bg-gray-800 text-white p-4 rounded-full shadow-lg hover:bg-gray-700 flex items-center justify-center">
+                <span class="material-icons text-2xl">dashboard</span>
+            </a>
+            <span class="absolute left-16 top-2 bg-gray-800 text-white px-2 py-1 rounded-md text-sm opacity-0 group-hover:opacity-100 transition">
+                Back to Dashboard
+            </span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="bg-gray-800 text-white py-6">
-      <div class="container mx-auto text-center">
-        <h1 class="text-3xl font-bold">Freelancer Management</h1>
-      </div>
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl font-bold">Freelancer Management</h1>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main class="container mx-auto mt-10">
-      {% if freelancers %}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for freelancer in freelancers %}
-        <div class="bg-white shadow-md rounded-lg p-6">
-          <h3 class="text-xl font-bold text-gray-800">
-            {{ freelancer.username }}
-          </h3>
-          <p class="text-gray-600 mt-2">
-            <strong>Email:</strong> {{ freelancer.email }}
-          </p>
-          <p class="text-gray-600 mt-2">
-            <strong>Status:</strong> {{ freelancer.status | capitalize }}
-          </p>
+        {% if freelancers %}
+        <div class="overflow-x-auto shadow-md rounded-lg bg-white">
+            <table class="min-w-full table-auto border-collapse">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="py-3 px-6 text-left">Username</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for freelancer in freelancers %}
+                    <tr class="hover:bg-gray-100">
+                        <td class="py-3 px-6 border-b">{{ freelancer.username }}</td>
+                        <td class="py-3 px-6 border-b">{{ freelancer.email }}</td>
+                        <td class="py-3 px-6 border-b capitalize">{{ freelancer.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        {% endfor %}
-      </div>
-      {% else %}
-      <p class="text-center text-gray-600 text-lg">No freelancers found.</p>
-      {% endif %}
-      <a
-        href="/admin_dashboard"
-        class="block text-center text-gray-600 mt-6 hover:underline"
-        >Back to Dashboard</a
-      >
+        {% else %}
+        <p class="text-center text-gray-600 text-lg mt-6">No freelancers found.</p>
+        {% endif %}
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-4 text-center">
-      <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-4 text-center mt-auto">
+        <p>&copy; 2024 Freelancing Portal. All rights reserved.</p>
     </footer>
-  </body>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</body>
 </html>

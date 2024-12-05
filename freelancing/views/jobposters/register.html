@@ -6,14 +6,27 @@
     <title>Job Poster Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Header -->
     <header class="bg-purple-600 text-white py-6">
         <div class="container mx-auto text-center">
             <h1 class="text-3xl font-bold">Job Poster Registration</h1>
         </div>
     </header>
-    <main class="container mx-auto mt-10 max-w-lg">
-        <div class="bg-white shadow-lg rounded-lg p-6">
+
+    <!-- Main Content -->
+    <main class="container mx-auto flex flex-col md:flex-row mt-10 gap-0">
+        <!-- Left Column -->
+        <div class="flex-1 bg-gray-50 flex items-center justify-center p-6 rounded-l-lg">
+            <img 
+                src="https://img.freepik.com/free-vector/businessman-with-laptop-analyzing-bar-chart-diagram-job-recruitment-candidate-selection-job-search-interview-concept-illustration_335657-3506.jpg" 
+                alt="Job Poster Registration" 
+                class="w-full max-w-md rounded-lg"
+            />
+        </div>
+
+        <!-- Right Column -->
+        <div class="flex-1 bg-white shadow-lg p-6 rounded-r-lg">
             <form action="/jobposter_register" method="POST" class="space-y-4">
                 <label for="username" class="block text-gray-700 font-medium">Username:</label>
                 <input type="text" id="username" name="username" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
@@ -27,7 +40,6 @@
                 <label for="company" class="block text-gray-700 font-medium">Company:</label>
                 <input type="text" id="company" name="company" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
 
-                <!-- take account number and routing number -->
                 <label for="account_number" class="block text-gray-700 font-medium">Account Number:</label>
                 <input type="text" id="account_number" name="account_number" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
 
@@ -39,7 +51,6 @@
                 </button>
                 <a href="/login" class="block text-center text-purple-600 hover:underline">Already have an account?</a>
                 <a href="/" class="block text-center text-green-600 hover:underline">Back to Home</a>
-
             </form>
         </div>
     </main>
